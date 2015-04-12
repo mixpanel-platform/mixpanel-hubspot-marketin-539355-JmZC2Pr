@@ -43,9 +43,8 @@
             MP.api.retention(eventName2, params).done(function(results) {
                 data = results.values();
                 eventTable.MPTable('setData', data);
-            //});
-          //}
-        });
+            });
+        };
         
         dateSelect.on('change', function(e, dateRange) {
           runQuery();
