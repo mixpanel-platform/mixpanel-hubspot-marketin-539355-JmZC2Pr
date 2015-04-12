@@ -50,12 +50,13 @@
           MP.api.retention(eventName1, params).done(function(results) {
             query = results.values();
             graphData = {};
-            _.each(_.keys(query), function(data){
-                var datas = query[data]
+            _.each(_.keys(query), function(date){
+                var data = query[date]
+                graphData[date] = {};
+                graphData[date]["first"] = data["first"]
                 
-                console.log(query)
-                console.log (datas)
-                console.log(data)
+                console.log(graphData)
+
                 
                 debugger
             });
