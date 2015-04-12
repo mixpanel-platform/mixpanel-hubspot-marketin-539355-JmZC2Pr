@@ -54,12 +54,11 @@
               var data = query[date]
               graphData[date] = {};
               graphData[date]["first"] = data["first"]
-              debugger
-              for (i = 0; i < data["counts"].length; i++) { 
-                debugger
-                graphData[date][i] = data["count"][i];
-              }    
-                console.log(graphData)
+              _.each(_.keys(data["counts"]), function(index){
+                var value = data["counts"][index];
+                graphData[date][index] = value
+              });
+              console.log(graphData)
                 
             });
             
