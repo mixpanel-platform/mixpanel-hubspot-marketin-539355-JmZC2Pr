@@ -51,10 +51,12 @@
             query = results.values();
             graphData = {};
             _.each(_.keys(query), function(date){
-                var data = query[date]
-                //graphData[date] = {};
-                graphData[date]["first"] = data["first"]
-                
+              var data = query[date]
+              graphData[date] = {};
+              graphData[date]["first"] = data["first"]
+              for (i = 0; i < data["count"].length; i++) { 
+                graphData[date][i] = data["count"][i];
+              }    
                 console.log(graphData)
 
                 
