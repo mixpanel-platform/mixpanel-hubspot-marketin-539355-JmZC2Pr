@@ -4,6 +4,12 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/css/reset.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.css">
     <script src="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.js"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="/DataTables-1.10.6/media/css/jquery.dataTables.css">
+    <!-- jQuery -->
+    <script type="text/javascript" charset="utf8" src="/DataTables-1.10.6/media/js/jquery.js"></script>
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="/DataTables-1.10.6/media/js/jquery.dataTables.js"></script>
   </head>
   <body class="mixpanel-platform-body">
     <div class="mixpanel-platform-section">
@@ -16,10 +22,7 @@
     <script>
       MP.api.ready(function() {
         var dateSelect  = $('#dateSelect').MPDatepicker();
-        var eventTable  = $('#table').MPTable({
-          showPercentages: true,
-          firstColHeader: 'Date'
-        });
+        var eventTable  = $('#table').DataTable();
         
         //convenience method for grabbing that datepicker value
         getDates = function() {
@@ -63,7 +66,9 @@
                 
             });
             
-            eventTable.MPTable('setData', graphData);
+            eventTable.DataTable( {
+              data: graphData
+            });;
           });
         }
 
