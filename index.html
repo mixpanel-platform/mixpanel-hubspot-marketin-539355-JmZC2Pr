@@ -20,39 +20,39 @@
     <div id="table"></div>
     <script>
       MP.api.ready(function() {
+        var eventSelect1 = $('#eventSelect1').MPEventSelect();
+        var eventSelect2 = $('#eventSelect2').MPEventSelect();
         var dateSelect  = $('#dateSelect').MPDatepicker();
+        var eventGraph  = $('#graph').MPChart({chartType: 'line'});
         var eventTable  = $('#table').MPTable({
           showPercentages: true,
           firstColHeader: 'Date'
         });
         
-        //convenience method for grabbing that datepicker value
-        getDates = function() {
-          return dateSelect.MPDatepicker('value')
+        var params = {
+          'from': '2015-01-01', //moment(),
+          'to': '2015-01-01', //moment(),
+          'unit': 'month',
+          'interval_count': 12,
+          'born_event': '$signup'
         };
-        
-        //find interval for bar chart 'interval' param
-        getInterval = function(dates) {
-          intervalDays = Math.ceil((dates.to - dates.from) / (24 * 60 * 60 * 1000)) + 1
-          return intervalDays
-        }
           
         var runQuery = function() {
-          var dateRange = dateSelect.MPDatepicker('value');
+          var eventName1 = eventSelect1.MPEventSelect('value'),
+              eventName2 = eventSelect2.MPEventSelect('value'),
+              dateRange = dateSelect.MPDatepicker('value');
           
-          var dates = getDates();
-          var params =  $.extend({}, dates, {
-            'retention_type': 'birth',
-            'interval': getInterval(dates),
-            'interval_count': 12,
-            'born_event': '$custom_event:31941',
-            'segment_method': 'first'
-          });
+          params['from'] = dateRange.from.toISOString().substring(0, 10);
+          params['to'] = dateRange.to.toISOString().substring(0, 10);
+          params['born_event'] = eventName1;
           
-          MP.api.retention('$custom_event:31911', params).done(function(results) {
-            data = results.values();
-            eventTable.MPTable('setData', data);
-          });
+          if (eventName1 && eventName2) {
+            var current_date = dateRange.from;
+            MP.api.retention(eventName2, params).done(function(results) {
+                data = results.values();
+                eventTable.MPTable('setData', data);
+            });
+          }
         }
         
         dateSelect.on('change', function(e, dateRange) {
