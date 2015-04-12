@@ -7,8 +7,12 @@
   </head>
   <body class="mixpanel-platform-body">
     <div class="mixpanel-platform-section">
+      <div id="eventSelect1" style="float: left;"></div>
+      <div id="birth" class="mixpanel-platform-label" style="margin-left: 10px;">cohorts</div>
       <div id="dateSelect" style="float: right;"></div>
       <div style="clear: both;"></div>
+      <div id="eventSelect2" style="float: left;"></div>
+      <div id="retention" class="mixpanel-platform-label" style="margin-left: 10px;">retention</div>
       <div id="blank" style="float: right;"></div>
       <div style="clear: both;"></div>
       <div id="graph"></div>
@@ -39,20 +43,30 @@
           var dates = getDates();
           var params =  $.extend({}, dates, {
             'retention_type': 'birth',
-            'event': '$custom_event:31911',
             'interval': getInterval(dates),
             'interval_count': 12,
             'born_event': '$custom_event:31941',
             'segment_method': 'first'
           });
           
-          MP.api.retention(eventName2, params).done(function(results) {
+          MP.api.retention('$custom_event:31911', params).done(function(results) {
             data = results.values();
             eventTable.MPTable('setData', data);
           });
         }
         
         dateSelect.on('change', function(e, dateRange) {
+          runQuery();
+        });
+              
+        eventSelect1.on('change', function(e, eventName) {
+          eventSelect2.MPEventSelect();
+          $("#birth").show();
+          $("#retention").show();
+          runQuery();
+        });
+        
+        eventSelect2.on('change', function(e, eventName) {
           runQuery();
         });
         
