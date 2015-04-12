@@ -42,7 +42,7 @@
           var params =  $.extend({}, dates, {
             'unit': 'week',
             'retention_type': 'birth',
-            'interval_count': 12,
+            'interval_count': getInterval(dates),
             'born_event': eventName2,
             'segment_method': 'first'
           });
