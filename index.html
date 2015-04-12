@@ -16,11 +16,10 @@
     <script>
       MP.api.ready(function() {
         var dateSelect  = $('#dateSelect').MPDatepicker();
-        debugger;
         var eventTable  = $('#table').MPTable({
           showPercentages: true,
           firstColHeader: 'Date',
-          sort: false
+          unsort: true
         });
         
         //convenience method for grabbing that datepicker value
