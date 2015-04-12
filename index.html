@@ -46,12 +46,12 @@
           params['to'] = dateRange.to.toISOString().substring(0, 10);
           params['born_event'] = eventName1;
           
-          if (eventName1 && eventName2) {
+          //if (eventName1 && eventName2) {
             var current_date = dateRange.from;
             MP.api.retention(eventName2, params).done(function(results) {
                 data = results.values();
                 eventTable.MPTable('setData', data);
-            });
+            //});
           }
         }
         
