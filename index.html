@@ -44,8 +44,7 @@
             'retention_type': 'birth',
             'interval_count': 12,
             'born_event': eventName2,
-            'segment_method': 'first',
-            'interval': getInterval(dates)
+            'segment_method': 'first'
           });
           
           MP.api.retention(eventName1, params).done(function(results) {
