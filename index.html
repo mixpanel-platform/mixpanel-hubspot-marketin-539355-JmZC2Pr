@@ -22,7 +22,7 @@
     <script>
       MP.api.ready(function() {
         var dateSelect  = $('#dateSelect').MPDatepicker();
-        var eventTable  = $('#table').DataTable();
+        //var eventTable  = $('#table').MPTable();
         
         //convenience method for grabbing that datepicker value
         getDates = function() {
@@ -66,9 +66,11 @@
                 
             });
             
-            eventTable.DataTable( {
+            $('#table').DataTable( {
               data: graphData
-            });;
+              
+            });
+            
           });
         }
 
