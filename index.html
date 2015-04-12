@@ -48,7 +48,17 @@
           });
           
           MP.api.retention(eventName1, params).done(function(results) {
-            data = results.values();
+            query = results.values();
+            graphData = {};
+            _.each(_.keys(query), function(data){
+                var datas = query[data]
+                
+                console.log(query)
+                console.log (datas)
+                console.log(data)
+                
+                debugger
+            
             eventTable.MPTable('setData', data);
           });
         };
