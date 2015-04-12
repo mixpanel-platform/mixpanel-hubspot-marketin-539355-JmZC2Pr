@@ -20,8 +20,8 @@
     <div id="table"></div>
     <script>
       MP.api.ready(function() {
-        //var eventSelect1 = $('#eventSelect1').MPEventSelect();
-        //var eventSelect2 = $('#eventSelect2').MPEventSelect();
+        var eventSelect1 = $('#eventSelect1').MPEventSelect();
+        var eventSelect2 = $('#eventSelect2').MPEventSelect();
         var dateSelect  = $('#dateSelect').MPDatepicker();
         var eventGraph  = $('#graph').MPChart({chartType: 'line'});
         var eventTable  = $('#table').MPTable({
@@ -38,20 +38,20 @@
         };
           
         var runQuery = function() {
-          var eventName1 = '$custom_event:31911',
-              eventName2 = '$custom_event:31941',
+          var eventName1 = eventSelect1.MPEventSelect('value'),
+              eventName2 = eventSelect2.MPEventSelect('value'),
               dateRange = dateSelect.MPDatepicker('value');
           
           params['from'] = dateRange.from.toISOString().substring(0, 10);
           params['to'] = dateRange.to.toISOString().substring(0, 10);
           params['born_event'] = eventName1;
           
-          //if (eventName1 && eventName2) {
+          if (eventName1 && eventName2) {
             var current_date = dateRange.from;
             MP.api.retention(eventName2, params).done(function(results) {
                 data = results.values();
                 eventTable.MPTable('setData', data);
-            //});
+            });
           }
         }
         
