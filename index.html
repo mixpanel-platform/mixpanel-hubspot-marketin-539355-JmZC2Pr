@@ -7,23 +7,15 @@
   </head>
   <body class="mixpanel-platform-body">
     <div class="mixpanel-platform-section">
-      <div id="eventSelect1" style="float: left;"></div>
-      <div id="birth" class="mixpanel-platform-label" style="margin-left: 10px;">cohorts</div>
       <div id="dateSelect" style="float: right;"></div>
       <div style="clear: both;"></div>
-      <div id="eventSelect2" style="float: left;"></div>
-      <div id="retention" class="mixpanel-platform-label" style="margin-left: 10px;">retention</div>
       <div id="blank" style="float: right;"></div>
       <div style="clear: both;"></div>
-      <div id="graph"></div>
     </div>
     <div id="table"></div>
     <script>
       MP.api.ready(function() {
-        var eventSelect1 = $('#eventSelect1').MPEventSelect();
-        var eventSelect2 = $('#eventSelect2').MPEventSelect();
         var dateSelect  = $('#dateSelect').MPDatepicker();
-        var eventGraph  = $('#graph').MPChart({chartType: 'line'});
         var eventTable  = $('#table').MPTable({
           showPercentages: true,
           firstColHeader: 'Date'
@@ -38,35 +30,24 @@
         };
           
         var runQuery = function() {
-          var eventName1 = eventSelect1.MPEventSelect('value'),
-              eventName2 = eventSelect2.MPEventSelect('value'),
+          var eventName1 = '$custom_event:31911',
+              eventName2 = '$custom_event:31941',
               dateRange = dateSelect.MPDatepicker('value');
           
           params['from'] = dateRange.from.toISOString().substring(0, 10);
           params['to'] = dateRange.to.toISOString().substring(0, 10);
           params['born_event'] = eventName1;
           
-          if (eventName1 && eventName2) {
+          //if (eventName1 && eventName2) {
             var current_date = dateRange.from;
             MP.api.retention(eventName2, params).done(function(results) {
                 data = results.values();
                 eventTable.MPTable('setData', data);
-            });
-          }
+            //});
+          //}
         }
         
         dateSelect.on('change', function(e, dateRange) {
-          runQuery();
-        });
-              
-        eventSelect1.on('change', function(e, eventName) {
-          eventSelect2.MPEventSelect();
-          $("#birth").show();
-          $("#retention").show();
-          runQuery();
-        });
-        
-        eventSelect2.on('change', function(e, eventName) {
           runQuery();
         });
         
