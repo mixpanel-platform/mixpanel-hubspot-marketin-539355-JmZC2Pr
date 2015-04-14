@@ -66,8 +66,9 @@
           
           console.log(graphData)
           
-          $(function(){
+          /*$(function(){
 			      var html = '<table border="1" cellspacing="1" cellpadding="5">'; 
+			      html += '<tr><th>
 			      $.each(graphData, function(time, data){
 				      html += '<tr>';
 				      html += '<td>' + time + '</td>';
@@ -80,9 +81,9 @@
 			    html += '</table>';
 
 			    $('#retention').html(html);
-		      });
+		      });*/
           
-          //eventTable.MPTable('setData', graphData);
+          eventTable.MPTable('setData', graphData);
             
           });
         }
