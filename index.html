@@ -13,6 +13,7 @@
       <div style="clear: both;"></div>
     </div>
     <div id="table"></div>
+    <table id="retention"></table>
     <script>
       MP.api.ready(function() {
         var dateSelect  = $('#dateSelect').MPDatepicker();
@@ -65,14 +66,14 @@
           console.log(graphData)
           
           $(function(){
-            var jsonObj = $.parseJSON('{"a":1,"b":3,"ds":4}');
-            console.log(graphData)
-
 			      var html = '<table border="1">';
-			      $.each(jsonObj, function(key, value){
+			      $.each(graphData, function(time, data){
 				      html += '<tr>';
-				      html += '<td>' + key + '</td>';
-				      html += '<td>' + value + '</td>';
+				      html += '<td>' + time + '</td>';
+				      $.each(data, function(cohort, values){
+				        html += '<td>' + cohort + '</td>'; 
+				        html += '<td>' + cohort + '</td>';
+				      })
 			      	html += '</tr>';
 		      	});
 			    html += '</table>';
