@@ -13,7 +13,7 @@
       <div style="clear: both;"></div>
     </div>
     <div id="table"></div>
-    <div id="retention"></div>
+    <table id="retention" style = "table, th, td {border: 1px solid black}"></table>
     
     <script>
       MP.api.ready(function() {
@@ -67,8 +67,7 @@
           console.log(graphData)
           
           $(function(){
-            var html = ""
-			      html += '<table border="1" cellspacing="1" cellpadding="5">'; 
+			      var html = '<table border="1" cellspacing="1" cellpadding="5">'; 
 			      $.each(graphData, function(time, data){
 				      html += '<tr>';
 				      html += '<td>' + time + '</td>';
