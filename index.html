@@ -58,7 +58,7 @@
 
               _.each(_.keys(data["counts"]), function(index){
                 var value = data["counts"][index];
-                graphData[date][index] = value
+                graphData[date][index] = value/(data["first"])*100 + '%'
               });
             });
           
