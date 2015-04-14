@@ -14,6 +14,7 @@
     </div>
     <div id="table"></div>
     <table id="retention"></table>
+    
     <script>
       MP.api.ready(function() {
         var dateSelect  = $('#dateSelect').MPDatepicker();
@@ -78,7 +79,7 @@
 		      	});
 			    html += '</table>';
 
-			    $('#table').html(html);
+			    $('#retention').html(html);
 		      });
           
           //eventTable.MPTable('setData', graphData);
