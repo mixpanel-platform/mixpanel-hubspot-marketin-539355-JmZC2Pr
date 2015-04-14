@@ -63,8 +63,18 @@
             });
           
           console.log(graphData)
+          
+          var tr;
+          for (var i = 0, i < data.length; i++){
+            tr = $('<tr/>');
+            tr.append("<td>" + graphData[i].User_Name + "</td>");
+            tr.append("<td>" + graphData[i].score + "</td>");
+            tr.append("<td>" + graphData[i].team + "</td>");
+        $('table').append(tr);
             
-          eventTable.MPTable('setData', graphData);
+          }
+            
+          //eventTable.MPTable('setData', graphData);
             
           });
         }
